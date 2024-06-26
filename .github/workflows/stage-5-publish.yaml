@@ -35,6 +35,11 @@ on:
         description: "Is this a semantically versioned pre release, set by the CI/CD pipeline workflow"
         required: true
         type: string
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 jobs:
   publish:
     name: "Publish packages"
