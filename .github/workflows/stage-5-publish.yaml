@@ -61,19 +61,19 @@ jobs:
           draft: false
           prerelease: ${{ inputs.is_version_prerelease == 'true'}}
 
-      - name: "tar gz jekyll docs release asset"
-        # Git hub pages needs a single tar called artifact inside the zip.
-        working-directory: ./artifacts/jekyll-docs-${{ inputs.version }}
-        run: zip jekyll-docs-${{ inputs.version }}.zip ./artifact.tar
-        shell: bash
+      #- name: "tar gz jekyll docs release asset"
+      #   # Git hub pages needs a single tar called artifact inside the zip.
+      #  working-directory: ./artifacts/jekyll-docs-${{ inputs.version }}
+      #  run: zip jekyll-docs-${{ inputs.version }}.zip ./artifact.tar
+      #  shell: bash
       - name: "Upload jeykll docs release asset"
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: "${{ steps.create_release.outputs.upload_url }}"
-          asset_path: ./artifacts/jekyll-docs-${{ inputs.version }}/jekyll-docs-${{ inputs.version }}.zip
-          asset_name: jekyll-docs-${{ inputs.version }}.zip
+          asset_path: ./artifacts/jekyll-docs-${{ inputs.version }}/artifact.tar
+          asset_name: jekyll-docs-${{ inputs.version }}.tar
           asset_content_type: "application/gzip"
 
       # - name: "Upload other release asset 1"

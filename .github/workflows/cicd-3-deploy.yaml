@@ -64,8 +64,21 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release download -p jekyll-docs-*.zip
+          gh release download -p jekyll-docs-*.tar --output artifact.tar
           ls -la
+
+      - uses: actions/upload-artifact@v4
+        with:
+          # Name of the artifact to upload.
+          # Optional. Default is 'artifact'
+          name: jekyll-docs
+
+          # A file, directory or wildcard pattern that describes what to upload
+          # Required.
+          path: artifact.tar
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: jekyll-docs
