@@ -62,7 +62,7 @@ jobs:
           prerelease: ${{ inputs.is_version_prerelease }}
 
       - name: "tar gz jekyll docs release asset"
-        run: tar -cvzf jekyll-docs-${{ inputs.version }}.tar.gz jekyll-docs-${{ inputs.version }}
+        run: tar -cvzf jekyll-docs-${{ inputs.version }}.tar.gz ./artifacts/jekyll-docs-${{ inputs.version }}
         shell: bash
       - name: "Upload jeykll docs release asset"
         uses: actions/upload-release-asset@v1
