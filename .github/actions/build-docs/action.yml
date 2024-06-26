@@ -38,4 +38,4 @@ runs:
       uses: actions/upload-pages-artifact@v3
       with:
         path: "docs/_site/"
-        name: jekyll-docs-${{ inputs.version }}.zip
+        name: jekyll-docs-${{ inputs.version }}
