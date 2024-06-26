@@ -66,6 +66,7 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v4
       - name: "Get asset"
+        id: get-asset
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
@@ -76,12 +77,13 @@ jobs:
           echo $tag
           gh release download $tag -p jekyll-docs-*.tar --output artifact.tar
           ls -la
+          echo tag=$(echo $tag) >> $GITHUB_OUTPUT
 
       - uses: actions/upload-artifact@v4
         with:
           # Name of the artifact to upload.
           # Optional. Default is 'artifact'
-          name: jekyll-docs
+          name: jekyll-docs-${{steps.get-asset.outputs.tag}}
 
           # A file, directory or wildcard pattern that describes what to upload
           # Required.
@@ -91,4 +93,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with:
-          artifact_name: jekyll-docs
+          artifact_name: jekyll-docs-${{steps.get-asset.outputs.tag}}
