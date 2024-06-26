@@ -22,3 +22,5 @@ Ross Template Testing
 555666666
 44444
 456456
+
+Auto build and deploy?
