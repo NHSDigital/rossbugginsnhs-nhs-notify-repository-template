@@ -70,6 +70,7 @@ jobs:
           export TERRAFORM_VERSION="${{ steps.variables.outputs.terraform_version }}"
           export VERSION="${{ steps.variables.outputs.version }}"
           export DOES_PULL_REQUEST_EXIST="${{ steps.pr_exists.outputs.does_pull_request_exist }}"
+          export IS_VERSION_PRERELEASE="${{ steps.pr_exists.outputs.is_version_prerelease }}"
           make list-variables
   commit-stage: # Recommended maximum execution time is 2 minutes
     name: "Commit stage"
@@ -129,7 +130,7 @@ jobs:
     name: "Publish stage"
     needs: [metadata, acceptance-stage]
     uses: ./.github/workflows/stage-5-publish.yaml
-    if: needs.metadata.outputs.does_pull_request_exist == 'true' || (github.event.action == 'push' && github.ref == 'refs/heads/main')
+    if: needs.metadata.outputs.does_pull_request_exist == 'true' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     with:
       build_datetime: "${{ needs.metadata.outputs.build_datetime }}"
       build_timestamp: "${{ needs.metadata.outputs.build_timestamp }}"
