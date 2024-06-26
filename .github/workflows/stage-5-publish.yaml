@@ -31,7 +31,10 @@ on:
         description: "Version of the software, set by the CI/CD pipeline workflow"
         required: true
         type: string
-
+      is_version_prerelease:
+        description: "Is this a semantically versioned pre release, set by the CI/CD pipeline workflow"
+        required: true
+        type: string
 jobs:
   publish:
     name: "Publish packages"
@@ -57,7 +60,7 @@ jobs:
           body: |
             Release of ${{ inputs.version }}
           draft: false
-          prerelease: false
+          prerelease: ${{ inputs.is_version_prerelease }}
       - name: "Upload jeykll docs release asset"
         uses: actions/upload-release-asset@v1
         env:
@@ -67,7 +70,16 @@ jobs:
           asset_path: ./artifacts
           asset_name: jekyll-docs-${{ inputs.version }}.tar.gz
           asset_content_type: "application/gzip"
-      # - name: "Upload release asset"
+      # - name: "Upload other release asset 1"
+      #   uses: actions/upload-release-asset@v1
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   with:
+      #     upload_url: "${{ steps.create_release.outputs.upload_url }}"
+      #     asset_path: ./*
+      #     asset_name: repository-template-${{ inputs.version }}.tar.gz
+      #     asset_content_type: "application/gzip"
+      # - name: "Upload other release asset 2"
       #   uses: actions/upload-release-asset@v1
       #   env:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
