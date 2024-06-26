@@ -49,29 +49,22 @@ jobs:
           export VERSION="${{ steps.variables.outputs.version }}"
           export TAG="${{ steps.variables.outputs.tag }}"
           make list-variables
-  deploy:
-    name: "Deploy to an environment"
+
+  deploy-jekyll:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    needs: [metadata]
-    timeout-minutes: 10
+    needs: metadata
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
-  # TODO: More jobs or/and steps here
-  # success:
-  #   name: "Success notification"
-  #   runs-on: ubuntu-latest
-  #   needs: [deploy]
-  #   steps:
-  #     - name: "Check prerequisites for notification"
-  #       id: check
-  #       run: echo "secret_exist=${{ secrets.TEAMS_NOTIFICATION_WEBHOOK_URL != '' }}" >> $GITHUB_OUTPUT
-  #     - name: "Notify on deployment to an environment"
-  #       if: steps.check.outputs.secret_exist == 'true'
-  #       uses: nhs-england-tools/notify-msteams-action@v0.0.4
-  #       with:
-  #         github-token: ${{ secrets.GITHUB_TOKEN }}
-  #         teams-webhook-url: ${{ secrets.TEAMS_NOTIFICATION_WEBHOOK_URL }}
-  #         message-title: "Notification title"
-  #         message-text: "This is a notification body"
-  #         link: ${{ github.event.pull_request.html_url }}
+      - name: "Get asset"
+        shell: bash
+        run: |
+          gh release download
+          ls -la
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
