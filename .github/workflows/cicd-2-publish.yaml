@@ -58,6 +58,7 @@ jobs:
         run: |
           echo "Getting the artefacts created by the build stage ..."
           # TODO: Use either action/cache or action/upload-artifact
+
       - name: "Create release"
         id: create_release
         uses: actions/create-release@v1
@@ -70,6 +71,15 @@ jobs:
             Release of ${{ needs.metadata.outputs.version }}
           draft: false
           prerelease: false
+      - name: "Upload jeykll docs release asset"
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: "${{ steps.create_release.outputs.upload_url }}"
+          asset_path: ./*
+          asset_name: jekyll-docs-${{ needs.metadata.outputs.version }}.tar.gz
+          asset_content_type: "application/gzip"
       # - name: "Upload release asset"
       #   uses: actions/upload-release-asset@v1
       #   env:
