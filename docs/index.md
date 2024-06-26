@@ -15,12 +15,4 @@ author: Ross Buggins
 
 [![CI/CD Pull Request](https://github.com/NHSDigital/nhs-notify-repository-template/actions/workflows/cicd-1-pull-request.yaml/badge.svg)](https://github.com/NHSDigital/nhs-notify-repository-template/actions/workflows/cicd-1-pull-request.yaml)
 
-## NHS Notify Template Repository Documentation Home Page
-
-Ross Template Testing
-
-555666666
-44444
-456456
-
-Auto build and deploy?
+## Testing separate publish and deploy workflows. 
