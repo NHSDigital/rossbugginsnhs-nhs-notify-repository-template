@@ -66,8 +66,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: "${{ steps.create_release.outputs.upload_url }}"
-          asset_path: ./artifacts
-          asset_name: jekyll-docs-${{ inputs.version }}
+          asset_path: ./artifacts/jekyll-docs-${{ inputs.version }}.zip
+          asset_name: jekyll-docs-${{ inputs.version }}.zip
           asset_content_type: "application/gzip"
       # - name: "Upload other release asset 1"
       #   uses: actions/upload-release-asset@v1
