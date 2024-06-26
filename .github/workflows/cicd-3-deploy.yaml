@@ -64,7 +64,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release download -p jekyll-docs-*.tar --output artifact.tar
+          json=$(gh release list --json tagName --limit 1)
+          echo $json
+          tag=$(echo $json | (jq '.[0].tagName'))
+          echo $tag
+          gh release download $tag -p jekyll-docs-*.tar --output artifact.tar
           ls -la
 
       - uses: actions/upload-artifact@v4
