@@ -8,7 +8,9 @@ runs:
     - uses: actions/setup-node@v4
       with:
         node-version: 18
-    - run: npm ci
+    - name: Npm cli install
+      run: npm ci
+      shell: bash
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1.180.1
       with:
