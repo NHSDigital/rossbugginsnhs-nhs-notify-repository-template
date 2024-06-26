@@ -43,7 +43,7 @@ jobs:
           echo "python_version=$(grep "^nodejs" .tool-versions | cut -f2 -d' ')" >> $GITHUB_OUTPUT
           echo "terraform_version=$(grep "^terraform" .tool-versions | cut -f2 -d' ')" >> $GITHUB_OUTPUT
           echo "version=$(head -n 1 .version 2> /dev/null || echo unknown)" >> $GITHUB_OUTPUT
-          echo "is_version_prerelease=$(if [[ $version == *-* ]] then echo "true"; else echo "false"; fi)" >> $GITHUB_OUTPUT
+          echo "is_version_prerelease=$(if [[ $version == *-* ]]; then echo "true"; else echo "false"; fi)" >> $GITHUB_OUTPUT
 
       - name: "Check if pull request exists for this branch"
         id: pr_exists
