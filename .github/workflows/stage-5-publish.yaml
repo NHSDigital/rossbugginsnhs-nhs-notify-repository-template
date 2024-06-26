@@ -39,7 +39,6 @@ jobs:
   publish:
     name: "Publish packages"
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true
     timeout-minutes: 3
     steps:
       - name: "Checkout code"
