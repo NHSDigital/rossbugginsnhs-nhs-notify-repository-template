@@ -61,8 +61,8 @@ jobs:
           draft: false
           prerelease: ${{ inputs.is_version_prerelease }}
 
-      - name: "Zip jekyll docs release asset"
-        run: zip -r jekyll-docs-${{ inputs.version }}.zip jekyll-docs-${{ inputs.version }}
+      - name: "tar gz jekyll docs release asset"
+        run: tar -cvzf jekyll-docs-${{ inputs.version }}.tar.gz jekyll-docs-${{ inputs.version }}
         shell: bash
       - name: "Upload jeykll docs release asset"
         uses: actions/upload-release-asset@v1
@@ -70,8 +70,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: "${{ steps.create_release.outputs.upload_url }}"
-          asset_path: ./artifacts/jekyll-docs-${{ inputs.version }}.zip
-          asset_name: jekyll-docs-${{ inputs.version }}.zip
+          asset_path: ./jekyll-docs-${{ inputs.version }}.tar.gz
+          asset_name: jekyll-docs-${{ inputs.version }}.tar.gz
           asset_content_type: "application/gzip"
 
       # - name: "Upload other release asset 1"
