@@ -60,6 +60,10 @@ jobs:
             Release of ${{ inputs.version }}
           draft: false
           prerelease: ${{ inputs.is_version_prerelease }}
+
+      - name: "Zip jekyll docs release asset"
+        run: zip -r jekyll-docs-${{ inputs.version }}.zip jekyll-docs-${{ inputs.version }}
+        shell: bash
       - name: "Upload jeykll docs release asset"
         uses: actions/upload-release-asset@v1
         env:
@@ -69,6 +73,7 @@ jobs:
           asset_path: ./artifacts/jekyll-docs-${{ inputs.version }}.zip
           asset_name: jekyll-docs-${{ inputs.version }}.zip
           asset_content_type: "application/gzip"
+
       # - name: "Upload other release asset 1"
       #   uses: actions/upload-release-asset@v1
       #   env:
