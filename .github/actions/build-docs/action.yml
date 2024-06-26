@@ -1,5 +1,9 @@
 name: "Build Docs"
 description: "build jekyll docs"
+inputs:
+  version:
+    description: "Version number"
+    required: true
 runs:
   using: "composite"
   steps:
@@ -34,4 +38,4 @@ runs:
       uses: actions/upload-pages-artifact@v3
       with:
         path: "docs/_site/"
-        name: jekyll-docs
+        name: jekyll-docs-${{ inputs.version }}

@@ -67,7 +67,7 @@ jobs:
         with:
           upload_url: "${{ steps.create_release.outputs.upload_url }}"
           asset_path: ./artifacts
-          asset_name: jekyll-docs-${{ inputs.version }}.tar.gz
+          asset_name: jekyll-docs-${{ inputs.version }}
           asset_content_type: "application/gzip"
       # - name: "Upload other release asset 1"
       #   uses: actions/upload-release-asset@v1
