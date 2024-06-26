@@ -22,6 +22,7 @@ runs:
     - name: Build with Jekyll
       working-directory: ./docs
       # Outputs to the './_site' directory by default
+      shell: bash
       run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
       env:
         JEKYLL_ENV: production
