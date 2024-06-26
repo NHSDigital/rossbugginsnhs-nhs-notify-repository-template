@@ -42,9 +42,9 @@ jobs:
       - name: "Checkout code"
         uses: actions/checkout@v4
       - name: "Get the artefacts"
-        run: |
-          echo "Getting the artefacts created by the build stage ..."
-          # TODO: Use either action/cache or action/upload-artifact
+        uses: actions/download-artifact@v4
+        with:
+          path: ./artifacts
 
       - name: "Create release"
         id: create_release
@@ -64,7 +64,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: "${{ steps.create_release.outputs.upload_url }}"
-          asset_path: ./*
+          asset_path: ./artifacts
           asset_name: jekyll-docs-${{ inputs.version }}.tar.gz
           asset_content_type: "application/gzip"
       # - name: "Upload release asset"
