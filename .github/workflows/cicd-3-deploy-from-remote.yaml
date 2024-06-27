@@ -1,21 +1,8 @@
-name: "2b. CI/CD deploy from specific repo"
+name: "2b. Example CI/CD deploy from specific repo"
 
+# This should not be in the source repo.
 on:
   workflow_dispatch:
-    # inputs:
-    #   release:
-    #     type: choice
-    #     description: "Sets as an actual non pre release and removes semantic trailing"
-    #     default: 'false'
-    #     options:
-    #     - 'true'
-    #     - 'false'
-    #tag:
-    #  description: "This is the tag that is oging to be deployed"
-    #  required: true
-    #  default: "latest"
-
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
