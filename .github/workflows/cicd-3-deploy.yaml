@@ -1,11 +1,11 @@
-name: "2. CI/CD deploy GitHub jekyll documentation"
+name: "2. Deploy docs to GitHub Pages"
 
 on:
   workflow_dispatch:
      inputs:
        ignore_prereleases:
          type: choice
-         description: "Only uses latest no prerelease"
+         description: "Ignore pre-releases"
          default: 'false'
          options:
          - 'true'
