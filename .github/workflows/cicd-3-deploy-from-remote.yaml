@@ -1,4 +1,4 @@
-name: "2. CI/CD deploy"
+name: "2b. CI/CD deploy from specific repo"
 
 on:
   workflow_dispatch:
@@ -78,11 +78,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          json=$(gh release list --json tagName --limit 1)
+          json=$(gh release list --json tagName --limit 1 --repo github.com/NHSDigital/rossbugginsnhs-nhs-notify-repository-template)
           echo $json
           tag=$(echo $json | (jq -r '.[0].tagName'))
           echo $tag
-          gh release download $tag -p jekyll-docs-*.tar --output artifact.tar
+          gh release download $tag -p jekyll-docs-*.tar --output artifact.tar --repo github.com/NHSDigital/rossbugginsnhs-nhs-notify-repository-template
           ls -la
           echo tag=$(echo $tag) >> $GITHUB_OUTPUT
 
